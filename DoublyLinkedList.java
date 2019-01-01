@@ -13,7 +13,6 @@ public class DoublyLinkedList<T> extends SinglyLinkedList<T> {
 	
 	/**
 	 * Entry [prev|e|next] stores a doubly linked list node.
-	 * @param <E>
 	 */
 	static class Entry<E> extends SinglyLinkedList.Entry<E> {
 		Entry<E> prev;
@@ -35,9 +34,11 @@ public class DoublyLinkedList<T> extends SinglyLinkedList<T> {
 	
 	/**
 	 * Returns DLL Iterator after creating one.
-	 * @return
+	 * @return a doubly linked list iterator
 	 */
-	public DLLIterator dllIterator() { return new DLLIterator(); }
+	public DLLIterator dllIterator() { 
+		return new DLLIterator(); 
+	}
 
 	/**
 	 * Doubly Linked List Iterator Interface
@@ -64,21 +65,17 @@ public class DoublyLinkedList<T> extends SinglyLinkedList<T> {
 	protected class DLLIterator extends SLLIterator implements DoublyLinkedListIterator<T> {
 
 		/**
-		 * If you omit the superclass constructor call, the superclass constructor with
+		 * NOTE: If you omit the superclass constructor call, the superclass constructor with
 		 * no arguments is invoked.
 		 */
 		// DLLIterator() { super(); }
 
-		/**
-		 * Returns true if there exists a previous entry, false otherwise.
-		 */
+		// Returns true if there exists a previous entry, false otherwise.
 		public boolean hasPrevious() {
 			return ((DoublyLinkedList.Entry<T>) cursor).prev != null;
 		}
 
-		/**
-		 * Returns the previous entry.
-		 */
+		// Returns the previous entry.
 		public T previous() {
 			cursor = prev;
 			prev = ((DoublyLinkedList.Entry<T>) cursor).prev;
@@ -114,9 +111,7 @@ public class DoublyLinkedList<T> extends SinglyLinkedList<T> {
 			size--;
 		}
 
-		/**
-		 * Generic add(x) calls to add(Entry<T> e)
-		 */
+		// Generic add(x) calls to add(Entry<T> e)
 		public void add(T x) {
 			System.out.println(x);
 			add(new Entry<>(x, null, null));
@@ -147,16 +142,12 @@ public class DoublyLinkedList<T> extends SinglyLinkedList<T> {
 
 	} // end of class DLLIterator
 
-	/**
-	 * Add new elements to the end of the list
-	 */
+	// Add new elements to the end of the list
 	public void add(T x) {
 		add(new Entry<>(x, null, null));
 	}
 
-	/**
-	 * Add first element in the list before the next entry.
-	 */
+	// Add first element in the list before the next entry.
 	public void add(Entry<T> ent) {
 		tail.next = ent;
 		ent.prev = (Entry<T>) tail;
@@ -184,14 +175,13 @@ public class DoublyLinkedList<T> extends SinglyLinkedList<T> {
 		
 		Scanner in = new Scanner(System.in);
 		
-		whileloop: while (in.hasNext()) {
+		whileloop: 
+		while (in.hasNext()) {
 			int com = in.nextInt();
 			
 			switch (com) {
 
-			/**
-			 * Checks hasNext() and next() AND Move to next element and print it.
-			 */
+			// Checks hasNext() and next() AND Move to next element and print it.
 			case 1:
 				if (it.hasNext()) {
 					System.out.println(it.next());
@@ -200,9 +190,7 @@ public class DoublyLinkedList<T> extends SinglyLinkedList<T> {
 				}
 				break;
 
-			/**
-			 * Checks hasPrevious() and previous() AND Move to previous element and print it.
-			 */
+			// Checks hasPrevious() and previous() AND Move to previous element and print it.
 			case 2:
 				if (it.hasPrevious()) {
 					System.out.println(it.previous());
@@ -211,17 +199,13 @@ public class DoublyLinkedList<T> extends SinglyLinkedList<T> {
 				}
 				break;
 
-			/**
-			 * Checks remove() AND Removes an entry.
-			 */
+			// Checks remove() AND Removes an entry.
 			case 3:
 				it.remove();
 				lst.printList();
 				break;
 
-			/**
-			 * Checks add(x) AND Insert an entry.
-			 */
+			// Checks add(x) AND Insert an entry.
 			case 4:
 				int value = in.nextInt();
 				it.add(value);
